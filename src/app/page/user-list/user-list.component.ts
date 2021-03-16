@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 
@@ -10,13 +10,26 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  users$: Observable<User[]> = this.userService.getAll();
+  userList$: BehaviorSubject<User[]> = this.userService.list$;
 
   constructor(
     private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.userService.getAll();
   }
+
+  // onUpdate(user: User): void {
+  //   this.userService.update(user);
+  // }
+
+  onDelete(user: User): void {
+    this.userService.remove(user);
+  }
+
+  // onCreate(user: User): void {
+  //   this.userService.create(user);
+  // }
 
 }
