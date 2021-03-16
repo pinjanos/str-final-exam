@@ -10,14 +10,27 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UserListComponent implements OnInit {
 
+  filterKey = 'id';
+  phrase = '';
+  ascend = true;
+  sortKey = '';
+
+  userProperties: string[] = Object.keys(new User());
+
   userList$: BehaviorSubject<User[]> = this.userService.list$;
 
   constructor(
     private userService: UserService,
+    
   ) { }
 
   ngOnInit(): void {
     this.userService.getAll();
+  }
+
+  onChangeSort(data: string): void {
+    this.sortKey = data;
+    this.ascend = !this.ascend;
   }
 
   // onUpdate(user: User): void {

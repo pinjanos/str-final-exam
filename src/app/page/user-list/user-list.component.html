@@ -1,6 +1,14 @@
 <div class="row">
   <div class="col-12 mt-2">
     <h2>User List</h2>
+    <div class="col-12 mx-auto row py-2">
+      <select [(ngModel)]="filterKey" class="options-control form-control col-1 ml-auto py-4">
+        <option *ngFor="let user of userProperties" [value]="user">{{user}}</option>
+      </select>
+      <input [(ngModel)]="phrase" class="form-control mx-1 col-4 py-4" type="text" placeholder="Search">
+      <button class="btn btn-success col-1 mr-auto" type="submit"><span class="fa fa-search">search</span></button>
+    </div>
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -13,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userList$ | async">
+        <tr *ngFor="let user of userList$ | async | filter:filterKey:phrase">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
