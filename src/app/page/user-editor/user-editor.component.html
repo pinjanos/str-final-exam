@@ -7,7 +7,7 @@
         <label>Name</label>
         <!-- Validation: min 8 char, max 40 char, required -->
         <input class="form-control" type="text" name="name" [(ngModel)]="user.name"
-          pattern="{8,40}" required>
+        pattern=".{8,40}" required>
       </div>
       <div [hidden]="userForm.controls.name?.valid || userForm.controls.name?.pristine"
         class="error-feedback">
