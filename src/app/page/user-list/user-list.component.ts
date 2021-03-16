@@ -15,6 +15,15 @@ export class UserListComponent implements OnInit {
   ascend = true;
   sortKey = '';
 
+  cols: { title: string, key: string }[] = [
+    { key: 'id', title: 'Id' },
+    { key: 'name', title: 'Name' },
+    { key: 'email', title: 'Email' },
+    { key: 'address', title: 'Address' },
+    { key: 'active', title: 'Active' },
+  ];
+
+
   userProperties: string[] = Object.keys(new User());
 
   userList$: BehaviorSubject<User[]> = this.userService.list$;

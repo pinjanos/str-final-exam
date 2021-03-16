@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 mt-2">
     <h2>User List</h2>
-    <div class="col-12 mx-auto row py-2">
+    <div class="col-12 mx-auto row py-2 user-search">
       <select [(ngModel)]="filterKey" class="options-control form-control col-1 ml-auto py-4">
         <option *ngFor="let user of userProperties" [value]="user">{{user}}</option>
       </select>
@@ -12,16 +12,21 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>#</th>
+          <th class="sortedHeads" *ngFor="let col of cols" id="{{ col.key }}"
+          (click)="onChangeSort(col.key)">
+          {{ col.title }}</th>
+          <i *ngIf="ascend" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+          <i *ngIf="!ascend" class="fa fa-sort-amount-asc" aria-hidden="true"></i> &nbsp;
+          <!-- <th>#</th>
           <th>Name</th>
           <th>Email</th>
           <th>Address</th>
-          <th>Active</th>
+          <th>Active</th> -->
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userList$ | async | filter:filterKey:phrase">
+        <tr *ngFor="let user of userList$ | async | filter:filterKey:phrase | sort: sortKey: ascend">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
