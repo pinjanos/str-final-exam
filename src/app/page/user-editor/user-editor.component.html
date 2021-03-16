@@ -1,13 +1,13 @@
 <div class="row">
   <div *ngIf="user$ | async as user" class="col-6 offset-3 mt-3">
     <h2>Update / Create User</h2>
-    <form #userForm="ngForm">
+    <form #userForm="ngForm" (ngSubmit)="onUpdate(userForm, user)">
       <input name="id" type="hidden" [(ngModel)]="user.id">
       <div class="form-group">
         <label>Name</label>
         <!-- Validation: min 8 char, max 40 char, required -->
         <input class="form-control" type="text" name="name" [(ngModel)]="user.name"
-          pattern="^[A-ZÁÉŐÚŰÖÜÓÍ]{1}[a-záéűúőöüóí ]{8,40}$" required>
+          pattern="{8,40}" required>
       </div>
       <div [hidden]="userForm.controls.name?.valid || userForm.controls.name?.pristine"
         class="error-feedback">

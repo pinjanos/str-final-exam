@@ -38,12 +38,12 @@ export class UserEditorComponent implements OnInit {
     if (user.id === 0) {
       this.updating = true;
       this.userService.create(user).subscribe(
-        ev => this.router.navigate(['']))
+        () => this.router.navigate(['user']));
      
     } else {
       this.updating = true;
       this.userService.update(user).subscribe(
-        ev => this.router.navigate(['']))
+        () => this.router.navigate(['user']));
       
     }
   }
