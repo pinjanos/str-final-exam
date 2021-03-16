@@ -1,13 +1,6 @@
 {
   "users": [
     {
-      "id": 2,
-      "name": "Granville Taplin",
-      "email": "gtaplin1@vk.com",
-      "address": "274 Jenna Center",
-      "active": true
-    },
-    {
       "id": 5,
       "name": "Maxy Pendall",
       "email": "mpendall4@answers.com",

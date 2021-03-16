@@ -6,30 +6,30 @@
       <div class="form-group">
         <label>Name</label>
         <!-- Validation: min 8 char, max 40 char, required -->
-        <input
-        class="form-control"
-        type="text"
-        name="name"
-        [(ngModel)]="user.name">
+        <input class="form-control" type="text" name="name" [(ngModel)]="user.name"
+          pattern="^[A-ZÁÉŐÚŰÖÜÓÍ]{1}[a-záéűúőöüóí ]{8,40}$" required>
+      </div>
+      <div [hidden]="userForm.controls.name?.valid || userForm.controls.name?.pristine"
+        class="error-feedback">
+        Name must start with an UPPERCASE character, and must be min 8, max 40 characters long at least
       </div>
       <div class="form-group">
         <label>Email</label>
         <!-- Validation: valid email, required.
           Help: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript -->
-          <input
-          class="form-control"
-          type="text"
-          name="email"
-          [(ngModel)]="user.email">
-        </div>
-        <div class="form-group">
-          <label>Address</label>
-          <!-- Validation: min 8 char, max 100 char, required -->
-          <input
-          class="form-control"
-          type="text"
-          name="address"
-          [(ngModel)]="user.address">
+        <input class="form-control" type="text" name="email" [(ngModel)]="user.email"
+          pattern="^[a-z0-9.-_]{2,}@{1}[a-z0-9.-]{2,}\.{1}[a-z]{2,4}$" required>
+      </div>
+      <div [hidden]="userForm.controls.email?.valid || userForm.controls.email?.pristine" class="error-feedback">
+        Wrong email format / recommended format: sample1234@sample.com
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <!-- Validation: min 8 char, max 100 char, required -->
+        <input class="form-control" type="text" name="address" [(ngModel)]="user.address" pattern=".{8,100}" required>
+      </div>
+      <div [hidden]="userForm.controls.address?.valid" class="error-message">
+        Address must be 8-100 characters long!
       </div>
       <div class="form-group">
         <label>Active</label>
@@ -39,8 +39,9 @@
           <option [ngValue]="false">inactive</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary btn-block mt-5">
-        <i class="fa fa-save"></i>
+      <button [disabled]="userForm.invalid || updating" type="submit" class="btn btn-primary btn-block mt-5">
+        <i *ngIf="!updating" class="fa fa-save"></i>
+        <i *ngIf="updating" class="fa fa-refresh"></i>
       </button>
     </form>
   </div>
